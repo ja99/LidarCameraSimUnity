@@ -34,14 +34,14 @@ Make sure to use a bridged network adapter and allow permiscuous use
 
 ## Roadmap/Todo
 
--[ ] Read Camera pixels in Compute Shader instead of on the CPU for higher performance
--[ ] Maybe call ros.Send() in seperate thread
--[ ] Add noise slider for Lidar
--[ ] Add track tool
--[ ] Add track-follow tool
--[ ] Add models for official Formula Student cones
--[ ] Add rostf state publisher
--[ ] Add groundspeed sensor publisher
--[ ] Make this README better
--[ ] Use Universal Renderpipeline for more realistic graphics
--[ ] Create callbacks for Controler output, so that the perception pipeline output, can be used as inputs for this sim for a feedback loop
+- [ ] Read Camera pixels in Compute Shader instead of on the CPU for higher performance
+- [ ] Maybe call ros.Send() in seperate thread
+- [ ] Add noise slider for Lidar
+- [ ] Add track tool
+- [ ] Add track-follow tool
+- [ ] Add models for official Formula Student cones
+- [ ] Add rostf state publisher
+- [ ] Add groundspeed sensor publisher
+- [ ] Make this README better
+- [ ] Use Universal Renderpipeline for more realistic graphics
+- [ ] Create callbacks for Controler output, so that the perception pipeline output, can be used as inputs for this sim for a feedback loop
