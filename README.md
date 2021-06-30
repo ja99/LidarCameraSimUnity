@@ -34,8 +34,9 @@ Make sure to use a bridged network adapter and allow permiscuous use
 
 ## Roadmap/Todo
 
-- [ ] Read Camera pixels in Compute Shader instead of on the CPU for higher performance
-- [ ] Maybe call ros.Send() in seperate thread
+- [X] Read Camera pixels in Compute Shader instead of on the CPU for higher performance
+- [X] Maybe call ros.Send() in seperate thread
+- [ ] Try running ROS TCP endpoint in pypy
 - [ ] Add noise slider for Lidar
 - [ ] Add track tool
 - [ ] Add track-follow tool
