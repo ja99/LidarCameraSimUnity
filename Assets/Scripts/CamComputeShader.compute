@@ -10,40 +10,28 @@ struct dat
 };
 
 Texture2D<float4> InputTexture;
-// RWStructuredBuffer<uint> Pixels;
 RWStructuredBuffer<dat> Pixels;
 
 float xResolution;
 float yResolution;
 
-RWStructuredBuffer<float2> Deb;
 
-
-[numthreads(64,1,1)]
+[numthreads(256,1,1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
-    // TODO: insert actual code here!
+    int xi = id.x % xResolution;
+    int yi = yResolution -( id.x / xResolution);
 
-    int xi = id.x%xResolution;
-    int yi = id.x/xResolution;
 
-    
-    
     int2 pos = int2(xi, yi);
 
-    Deb[id.x] = pos;
+
+    float r = InputTexture[pos].r * 255.0;
+    float g = InputTexture[pos].g * 255.0;
+    float b = InputTexture[pos].b * 255.0;
 
 
-    // Pixels[id.x*3] = asuint((InputTexture[pos].r * 255.0));
-    // Pixels[(id.x*3)+1] = asuint((InputTexture[pos].g * 255.0));
-    // Pixels[(id.x*3)+2] = asuint((InputTexture[pos].b * 255.0));
-
-    uint r = InputTexture[pos].r * 255.0;
-    uint g = InputTexture[pos].g * 255.0;
-    uint b = InputTexture[pos].b * 255.0;
-
-    
     Pixels[id.x * 3].val = r;
-    Pixels[(id.x * 3)+ 1].val = g;
+    Pixels[(id.x * 3) + 1].val = g;
     Pixels[(id.x * 3) + 2].val = b;
 }

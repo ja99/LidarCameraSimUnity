@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using RosMessageTypes.Geometry;
 using Unity.Collections;
 using Unity.Jobs;
@@ -93,9 +94,9 @@ public class Lidar : MonoBehaviour
         {
             var resPoint = results[i].point -transform.position;
             
-            //ToDo: unmirror when you fixed the camera
-            // var p = new MPoint32(resPoint.z, -resPoint.x, resPoint.y);
-            var p = new MPoint32(resPoint.z, resPoint.x, resPoint.y);
+            //ToDo: unmirror when you fixed the camera (Done)
+            var p = new MPoint32(resPoint.z, -resPoint.x, resPoint.y);
+            //var p = new MPoint32(resPoint.z, resPoint.x, resPoint.y);
             point32s[i] = p;
             channelVals[i] = 1;
         }
@@ -106,9 +107,17 @@ public class Lidar : MonoBehaviour
         
         MPointCloud pointCloud = new MPointCloud(header, point32s, channels);
         
-        ros.Send(topicName, pointCloud);
+        // ros.Send(topicName, pointCloud);
 
+        Thread sendThread = new Thread(() => SendThread(pointCloud));
+        sendThread.Start();
+        
         sequenceCounter++;
+    }
+
+    void SendThread(MPointCloud pointCloud)
+    {
+        ros.Send(topicName, pointCloud);
     }
     
 
