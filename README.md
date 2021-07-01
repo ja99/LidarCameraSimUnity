@@ -36,7 +36,8 @@ Make sure to use a bridged network adapter and allow permiscuous use
 
 - [X] Read Camera pixels in Compute Shader instead of on the CPU for higher performance
 - [X] Maybe call ros.Send() in seperate thread
-- [ ] Try running ROS TCP endpoint in pypy
+- [ ] Try multiple simultaneous connections
+- [ ] Try interpreting the uint Array coming from the compute shader as byte Array to get rid of the loop.
 - [ ] Add noise slider for Lidar
 - [ ] Add track tool
 - [ ] Add track-follow tool
