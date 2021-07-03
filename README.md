@@ -47,3 +47,4 @@ Make sure to use a bridged network adapter and allow permiscuous use
 - [ ] Make this README better
 - [ ] Use Universal Renderpipeline for more realistic graphics
 - [ ] Create callbacks for Controler output, so that the perception pipeline output, can be used as inputs for this sim for a feedback loop
+- [ ] implement realistic car physics
