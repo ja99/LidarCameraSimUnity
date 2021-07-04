@@ -34,8 +34,10 @@ Make sure to use a bridged network adapter and allow permiscuous use
 
 ## Roadmap/Todo
 
-- [ ] Read Camera pixels in Compute Shader instead of on the CPU for higher performance
-- [ ] Maybe call ros.Send() in seperate thread
+- [X] Read Camera pixels in Compute Shader instead of on the CPU for higher performance
+- [X] Maybe call ros.Send() in seperate thread
+- [ ] Try multiple simultaneous connections
+- [ ] Try interpreting the uint Array coming from the compute shader as byte Array to get rid of the loop.
 - [ ] Add noise slider for Lidar
 - [ ] Add track tool
 - [ ] Add track-follow tool
@@ -45,3 +47,4 @@ Make sure to use a bridged network adapter and allow permiscuous use
 - [ ] Make this README better
 - [ ] Use Universal Renderpipeline for more realistic graphics
 - [ ] Create callbacks for Controler output, so that the perception pipeline output, can be used as inputs for this sim for a feedback loop
+- [ ] implement realistic car physics
