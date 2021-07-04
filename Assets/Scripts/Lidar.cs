@@ -40,7 +40,7 @@ public class Lidar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ros = ROSConnection.instance;
+        //ros = ROSConnection.instance;
         ros.RegisterPublisher(topicName, "sensor_msgs/PointCloud");
         last = DateTime.Now;
 

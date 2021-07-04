@@ -18,7 +18,7 @@ public class Cam : MonoBehaviour
 {
     private Camera _camera;
 
-    private ROSConnection ros;
+    public ROSConnection ros;
 
     private DateTime last;
 
@@ -50,7 +50,7 @@ public class Cam : MonoBehaviour
     {
         _camera = GetComponent<Camera>();
 
-        ros = ROSConnection.instance;
+        //ros = ROSConnection.instance;
         ros.RegisterPublisher(topicName, "sensor_msgs/Image");
 
 
