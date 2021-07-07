@@ -33,7 +33,7 @@ public class Cam : MonoBehaviour
 
     private int numOfThreads;
 
-    [Header("Variables")] public string topicName = "pylon_ros_camera/image_raw";
+    [Header("Variables")] public string topicName = "pylon_camera_node/image_raw";
 
     [Range(5, 60)] public float hz = 5f;
 

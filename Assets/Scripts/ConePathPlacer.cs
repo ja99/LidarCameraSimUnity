@@ -16,7 +16,7 @@ namespace PathCreation.Examples
 
         const float minSpacing = .1f;
 
-        private Vector3 riseCones = new Vector3(0, 0.157f, 0);
+        private Vector3 riseCones = new Vector3(0, 0, 0);
 
         //Place Cones along track
         void Generate()
@@ -40,21 +40,23 @@ namespace PathCreation.Examples
                     //Calculate the directional vector for the cones
                     Vector3 widthDistance = Vector3.Cross(directionVector, new Vector3(0, 1, 0)) * trackwidth / 2;
 
+                    var instantiationRot = Quaternion.Euler(-90, 0, 0);
+
 
                     //Place Starting Cones
                     if (dst == 0)
                     {
-                        Instantiate(leftStartingConeprefab, point - widthDistance, Quaternion.identity,
+                        Instantiate(leftStartingConeprefab, point - widthDistance, instantiationRot,
                             holder.transform);
-                        Instantiate(rightStartingConeprefab, point + widthDistance, Quaternion.identity,
+                        Instantiate(rightStartingConeprefab, point + widthDistance, instantiationRot,
                             holder.transform);
                     }
                     else
                     {
                         //place Cones left and right of the track
-                        Instantiate(leftConeprefab, point + widthDistance + riseCones, Quaternion.identity,
+                        Instantiate(leftConeprefab, point + widthDistance + riseCones, instantiationRot,
                             holder.transform);
-                        Instantiate(rightConeprefab, point - widthDistance + riseCones, Quaternion.identity,
+                        Instantiate(rightConeprefab, point - widthDistance + riseCones, instantiationRot,
                             holder.transform);
                     }
 
