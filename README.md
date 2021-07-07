@@ -3,10 +3,20 @@
 This is a car perception simulator for Unity3D developed as an perception pipeline testing tool for [Einstein Motorsport](https://einstein-motorsport.com/).
 It currently supports the simulation of a Lidar sensor as well as a camera and can send this data live to ROS for inference.
 
+Scene view:
+
+![scene_view](https://imgshare.org/i/azZG3596.png)
+
+RVIZ view:
+
+![rviz_view](https://imgshare.org/i/tTX13595.jpg)
+
+
 ## Credit
 
 - The ROS-Connection is done through [Unity's own ROS Integration](https://github.com/Unity-Technologies/Unity-Robotics-Hub) which is largely based on Dr. Martin Bischoffs [ROS-Sharp](https://github.com/MartinBischoff/ros-sharp)
 - The Track tool is based on Sebastian Lagues [Path Creator](https://github.com/SebLague/Path-Creator)
+- The cone models were created by Torsten Hahn
 
 ## Installation
 
@@ -41,9 +51,9 @@ Make sure to use a bridged network adapter and allow permiscuous use
 - [X] Try multiple simultaneous connections (improved performance from 10 hz to 15hz for the lidar and 25 hz for the camera)
 - [X] Add track tool
 - [X] Add track-follow tool
+- [X] Add models for official Formula Student cones (Thanks to Torsten Hahn)
 - [ ] Try interpreting the uint Array coming from the compute shader as byte Array to get rid of the loop.
 - [ ] Add noise slider for Lidar
-- [ ] Add models for official Formula Student cones
 - [ ] Add rostf state publisher
 - [ ] Add groundspeed sensor publisher
 - [ ] Make this README better
