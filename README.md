@@ -7,6 +7,11 @@ Scene view:
 
 ![scene_view](https://imgshare.org/i/azZG3596.png)
 
+Scene view + perception Debug:
+
+![scene_view_perception_debug](https://imgshare.org/i/mds33726.jpg)
+
+
 RVIZ view:
 
 ![rviz_view](https://imgshare.org/i/tTX13595.jpg)
