@@ -7,12 +7,13 @@ using Unity.Collections;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
-using System;
 using System.Threading;
 using RosMessageTypes.Sensor;
 using Unity.Burst;
 using Unity.Jobs;
 using Unity.Mathematics;
+using UnityEditor;
+// using Newtonsoft.Json;
 
 public class Cam : MonoBehaviour
 {
@@ -44,7 +45,6 @@ public class Cam : MonoBehaviour
     private Stopwatch stopwatch;
 
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -52,13 +52,14 @@ public class Cam : MonoBehaviour
 
         //ros = ROSConnection.instance;
         ros.RegisterPublisher(topicName, "sensor_msgs/Image");
+        
 
 
         renderTexture = new RenderTexture(resolution.x, resolution.y, 16);
         texture = new Texture2D(resolution.x, resolution.y);
-        _camera.targetTexture =renderTexture;
-        
-        
+        _camera.targetTexture = renderTexture;
+
+
         pixels = new Dat[resolution.x * resolution.y * 3];
         pixelsBuffer = new ComputeBuffer(pixels.Length, sizeof(uint));
         computeShader.SetBuffer(0, "Pixels", pixelsBuffer);
@@ -68,25 +69,24 @@ public class Cam : MonoBehaviour
 
 
         uint x = 0;
-        uint throwaway =0;
-        computeShader.GetKernelThreadGroupSizes(0, out x,out throwaway,out throwaway);
-        numOfThreads = (int)x;
+        uint throwaway = 0;
+        computeShader.GetKernelThreadGroupSizes(0, out x, out throwaway, out throwaway);
+        numOfThreads = (int) x;
 
-        
+
         last = DateTime.Now;
     }
 
+   
 
     private void OnPostRender()
     {
         var now = DateTime.Now;
         if ((now - last).TotalSeconds >= (1 / hz))
         {
-            
             last = now;
 
             SendOfToRosShader();
-            
         }
     }
 
@@ -108,9 +108,9 @@ public class Cam : MonoBehaviour
 
         uint step = (uint) resolution.y * 3; //3 because there are 3 bytes in rgb8
 
-       
+
         RunShader();
-        
+
 
         byte[] data = new byte[pixels.Length];
 
@@ -121,16 +121,16 @@ public class Cam : MonoBehaviour
 
 
         var img = new RosMessageTypes.Sensor.MImage(header, (uint) resolution.y, (uint) resolution.x, "rgb8",
-            1 , step, data);
+            1, step, data);
 
-        
+
         // ros.Send(topicName, img);
 
         Thread sendThread = new Thread(() => SendThread(img));
         sendThread.Start();
-        
+
         // SendThread(img);
-        
+
         sequenceCounter++;
     }
 
@@ -144,11 +144,18 @@ public class Cam : MonoBehaviour
         computeShader.Dispatch(0, Mathf.CeilToInt((resolution.x * resolution.y) / (float) numOfThreads), 1, 1);
         pixelsBuffer.GetData(pixels);
     }
-
-    
 }
 
 public struct Dat
 {
     public uint val;
+}
+
+[Serializable]
+public struct ConePoint
+{
+    public double x { get; set; }
+    public double y { get; set; }
+    public string cone_type { get; set; }
+    public double probability { get; set; }
 }

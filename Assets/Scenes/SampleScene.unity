@@ -1691,6 +1691,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156221505}
   m_Mesh: {fileID: -2590403119604530764, guid: dc9e79c9a089709439a42bf815815ef9, type: 3}
+--- !u!1 &167256380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2687371966781438373, guid: 5e173ec520f54d64e8334aa4a2f6c49e, type: 3}
+  m_PrefabInstance: {fileID: 4728106666257597155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &167256386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167256380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0ffd137cc82a14bab8c612249dcea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ros: {fileID: 0}
+  rayDuration: 0.5
 --- !u!1 &177693918
 GameObject:
   m_ObjectHideFlags: 0
@@ -2965,6 +2984,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387884528}
   m_Mesh: {fileID: -2590403119604530764, guid: dc9e79c9a089709439a42bf815815ef9, type: 3}
+--- !u!1 &403957931 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 29694537093300495, guid: 5e173ec520f54d64e8334aa4a2f6c49e, type: 3}
+  m_PrefabInstance: {fileID: 4728106666257597155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &403957938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403957931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0ffd137cc82a14bab8c612249dcea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ros: {fileID: 1515452658}
+  rayDuration: 0.2
 --- !u!1 &407523815
 GameObject:
   m_ObjectHideFlags: 0
@@ -11266,7 +11304,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1132706857
 GameObject:
@@ -15286,6 +15324,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505788226}
   m_Mesh: {fileID: -1482932259137578043, guid: 690bb1c3fd2839b4580f430a5a55b312, type: 3}
+--- !u!1 &1515452657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515452659}
+  - component: {fileID: 1515452658}
+  m_Layer: 0
+  m_Name: Ros Connector upStream
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1515452658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515452657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acef0b79454c9b4dae3f8139bc4ba77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RosIPAddress: 192.168.0.32
+  m_RosPort: 10003
+  m_ConnectOnStart: 1
+  m_KeepaliveTime: 10
+  m_NetworkTimeoutSeconds: 2
+  m_SleepTimeSeconds: 0.0001
+  m_ShowHUD: 1
+--- !u!4 &1515452659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515452657}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1538956494
 GameObject:
   m_ObjectHideFlags: 0
@@ -15902,7 +15990,7 @@ Transform:
   - {fileID: 698766188}
   - {fileID: 1416550625}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1601480878
 GameObject:
@@ -20107,7 +20195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7377719157332140322, guid: 5e173ec520f54d64e8334aa4a2f6c49e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7377719157332140322, guid: 5e173ec520f54d64e8334aa4a2f6c49e, type: 3}
       propertyPath: m_LocalPosition.x
