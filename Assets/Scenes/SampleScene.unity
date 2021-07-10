@@ -3003,6 +3003,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ros: {fileID: 1515452658}
   rayDuration: 0.2
+--- !u!114 &403957939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403957931}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd1965e2044add44bfea0533f5a7ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &407523815
 GameObject:
   m_ObjectHideFlags: 0
@@ -20199,7 +20211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7377719157332140322, guid: 5e173ec520f54d64e8334aa4a2f6c49e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 35.02
       objectReference: {fileID: 0}
     - target: {fileID: 7377719157332140322, guid: 5e173ec520f54d64e8334aa4a2f6c49e, type: 3}
       propertyPath: m_LocalPosition.y
