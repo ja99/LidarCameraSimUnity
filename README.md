@@ -58,11 +58,11 @@ Make sure to use a bridged network adapter and allow permiscuous use
 - [X] Add track tool
 - [X] Add track-follow tool
 - [X] Add models for official Formula Student cones (Thanks to Torsten Hahn)
+- [X] Create callbacks for Controler output, so that the perception pipeline output, can be used as inputs for this sim for a feedback loop
+- [X] Add groundspeed sensor publisher (Added CarState Publisher)
 - [ ] Try interpreting the uint Array coming from the compute shader as byte Array to get rid of the loop.
 - [ ] Add noise slider for Lidar
 - [ ] Add rostf state publisher
-- [ ] Add groundspeed sensor publisher
 - [ ] Make this README better
 - [ ] Use Universal Renderpipeline for more realistic graphics
-- [ ] Create callbacks for Controler output, so that the perception pipeline output, can be used as inputs for this sim for a feedback loop
 - [ ] implement realistic car physics
