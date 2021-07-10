@@ -26,6 +26,7 @@ RVIZ view:
 - Open it in Unity 2021.0+
 - Install Unity's [ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector)
 - Insert the local IP of your machine running ROS into the ROS Connection Gameobject in the hirarchy
+- Download Newsofts Json tool from here https://github.com/jilleJr/Newtonsoft.Json-for-Unity and install it as well (Unitys own Json Utility doesn´t work reliably for me)
 
 ### ROS Side
 
