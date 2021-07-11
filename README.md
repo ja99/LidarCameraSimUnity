@@ -21,8 +21,7 @@ RVIZ view:
 
 - The ROS-Connection is done through [Unity's own ROS Integration](https://github.com/Unity-Technologies/Unity-Robotics-Hub) which is largely based on Dr. Martin Bischoffs [ROS-Sharp](https://github.com/MartinBischoff/ros-sharp)
 - The Track tool is based on Sebastian Lagues [Path Creator](https://github.com/SebLague/Path-Creator)
-- The cone models were created by Torsten Hahn
-
+- The cone models were created by [Torsten Hahn](https://github.com/RoostOne)
 ## Installation
 
 ### Unity Side
