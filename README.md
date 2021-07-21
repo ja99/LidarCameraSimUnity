@@ -21,8 +21,7 @@ RVIZ view:
 
 - The ROS-Connection is done through [Unity's own ROS Integration](https://github.com/Unity-Technologies/Unity-Robotics-Hub) which is largely based on Dr. Martin Bischoffs [ROS-Sharp](https://github.com/MartinBischoff/ros-sharp)
 - The Track tool is based on Sebastian Lagues [Path Creator](https://github.com/SebLague/Path-Creator)
-- The cone models were created by Torsten Hahn
-
+- The cone models were created by [Torsten Hahn](https://github.com/RoostOne)
 ## Installation
 
 ### Unity Side
@@ -58,11 +57,11 @@ Make sure to use a bridged network adapter and allow permiscuous use
 - [X] Add track tool
 - [X] Add track-follow tool
 - [X] Add models for official Formula Student cones (Thanks to Torsten Hahn)
+- [X] Create callbacks for Controler output, so that the perception pipeline output, can be used as inputs for this sim for a feedback loop
+- [X] Add groundspeed sensor publisher (Added CarState Publisher)
 - [ ] Try interpreting the uint Array coming from the compute shader as byte Array to get rid of the loop.
 - [ ] Add noise slider for Lidar
 - [ ] Add rostf state publisher
-- [ ] Add groundspeed sensor publisher
 - [ ] Make this README better
 - [ ] Use Universal Renderpipeline for more realistic graphics
-- [ ] Create callbacks for Controler output, so that the perception pipeline output, can be used as inputs for this sim for a feedback loop
 - [ ] implement realistic car physics
