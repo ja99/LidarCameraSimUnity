@@ -22,12 +22,13 @@ public class CarStatePublisher : MonoBehaviour
     private Vector3 lastRot = Vector3.zero;
     private Vector3 lastVelocity = Vector3.zero;
     private Vector3 acceleration = Vector3.zero;
+    private Vector3 lastAcceleration = Vector3.zero;
 
 
     //ToDo: send real values
     private float steeringAngle = 0;
-    private float brakePercentage = 0;
-    private float torque = 0;
+    public float brakePercentage = 0;
+    public float torque = 0;
 
     private String topic = "/as/car_state";
 
@@ -51,6 +52,7 @@ public class CarStatePublisher : MonoBehaviour
         angularVelocity = (rot - lastRot) / Time.fixedDeltaTime;
         lastRot = rot;
 
+        lastAcceleration = acceleration;
         acceleration = (velocity - lastVelocity) / Time.fixedDeltaTime;
 
 
@@ -74,7 +76,8 @@ public class CarStatePublisher : MonoBehaviour
 
 
         MCarState state = new MCarState(
-            header, SByte.Parse("3"),
+            header,
+            SByte.Parse("3"),
             SByte.Parse("3"),
             SByte.Parse("3"),
             true,
@@ -82,13 +85,13 @@ public class CarStatePublisher : MonoBehaviour
             velocity.z,
             -velocity.x,
             velocity.magnitude,
-            angularVelocity.y,
+            -angularVelocity.y * Mathf.Deg2Rad,
             steeringAngle,
-            brakePercentage,
-            torque,
+            0,
+            acceleration.magnitude,
             // Todo: Real values
-            acceleration_longitudinal: 1,
-            acceleration_lateral: 1
+            acceleration_longitudinal: acceleration.magnitude,
+            acceleration_lateral: 0
             );
         
         

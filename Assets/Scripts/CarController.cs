@@ -12,12 +12,15 @@ public class CarController : MonoBehaviour
     private String topic = "/as/control_result";
 
     private MControlResult controlState;
+
+    private CarStatePublisher carStatePublisher;
     
     
     
     // Start is called before the first frame update
     void Start()
     {
+        carStatePublisher = GetComponent<CarStatePublisher>();
         ros.RegisterSubscriber(topic, "mission_management/ControlResult");
         ros.Subscribe<MControlResult>(topic, Callback);
     }
