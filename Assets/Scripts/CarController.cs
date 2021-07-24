@@ -33,7 +33,7 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.Rotate(0,controlState.steering_angle_target,0);
+        transform.Rotate(0,-controlState.steering_angle_target,0);
         transform.position += transform.forward * (controlState.speed_target * Time.fixedDeltaTime);
     }
 }
