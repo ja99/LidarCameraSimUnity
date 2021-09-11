@@ -1,0 +1,32 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+
+Texture2D<float4> InputTexture;
+RWStructuredBuffer<uint> Pixels;
+
+float xResolution;
+float yResolution;
+
+
+[numthreads(256,1,1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    int xi = id.x % xResolution;
+    int yi = yResolution - (id.x / xResolution);
+
+
+    int2 pos = int2(xi, yi);
+
+
+    float r = InputTexture[pos].r * 255.0;
+    float g = InputTexture[pos].g * 255.0;
+    float b = InputTexture[pos].b * 255.0;
+
+
+    Pixels[id.x * 3] = r;
+    Pixels[(id.x * 3) + 1] = g;
+    Pixels[(id.x * 3) + 2] = b;
+}
