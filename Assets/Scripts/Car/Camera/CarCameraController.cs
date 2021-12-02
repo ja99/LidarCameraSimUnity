@@ -2,6 +2,9 @@ using System;
 using System.Text;
 using Communication.Messages;
 using UnityEngine;
+using System;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 namespace Car.Camera {
 
@@ -9,7 +12,7 @@ namespace Car.Camera {
         /// <summary>
         /// The dimensions of the image
         /// </summary>
-        private const int WIDTH = 1900, HEIGHT = 1200;
+        private const int WIDTH = 1024, HEIGHT = 640;
 
         /// <summary>
         /// The necessary buffer size
@@ -56,6 +59,11 @@ namespace Car.Camera {
         /// </summary>
         private int _numOfThreads;
 
+
+
+        private uint[] imageData = new uint[BUFFER_SIZE];
+        private byte[] data = new byte[BUFFER_SIZE];
+
         /// <summary>
         /// Initialize the car camera
         /// </summary>
@@ -89,19 +97,26 @@ namespace Car.Camera {
             var now = DateTime.Now;
             if ((now - _last).TotalSeconds < 1f / HZ) return;
             _last = now;
+
+            
             GenerateImageData();
+            
         }
 
         /// <summary>
         /// Generate a new image
         /// </summary>
         private void GenerateImageData() {
-            var imageData = new uint[BUFFER_SIZE];
+
+
             computeShader.Dispatch(0, Mathf.CeilToInt(WIDTH * HEIGHT / (float) _numOfThreads), 1, 1);
             _pixelsBuffer.GetData(imageData);
-            var data = new byte[BUFFER_SIZE];
+
+
             for (var i = 0; i < BUFFER_SIZE; i++) data[i] = (byte) imageData[i];
+            var s = Stopwatch.StartNew();
             OnNewImage?.Invoke(data);
+            print(s.ElapsedMilliseconds);
         }
 
         /// <summary>
