@@ -11,7 +11,7 @@ float xResolution;
 float yResolution;
 
 
-[numthreads(256,1,1)]
+[numthreads(32,1,1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
     int xi = id.x % xResolution;
