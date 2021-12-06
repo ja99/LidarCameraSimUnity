@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 namespace Car.Lidar {
     public class LidarController : MonoBehaviour {
@@ -44,6 +46,10 @@ namespace Car.Lidar {
         /// Last time a picture was generated
         /// </summary>
         private DateTime _last;
+        
+        // Generate the byte array (12 bytes = 3 * 4 bytes and 4 bytes = 1 float)
+        private byte[] data;
+        private float[] values = new float[3];
 
         /// <summary>
         /// Initialize the lidar
@@ -52,6 +58,7 @@ namespace Car.Lidar {
             _last = DateTime.Now;
             CreateCommands();
             _results = new NativeArray<RaycastHit>(_commands.Length, Allocator.TempJob);
+            data = new byte[12 * _results.Length];
         }
 
         /// <summary>
@@ -77,6 +84,8 @@ namespace Car.Lidar {
         /// </summary>
         private void CreateCommands() {
             var result = new List<RaycastCommand>();
+            
+            
             for (float horizontal = 0; horizontal < 360f; horizontal += horizontalResolution) {
                 for (var vertical = -(verticalAngleRange * 0.5f);
                     vertical <= verticalAngleRange * 0.5f;
@@ -111,11 +120,13 @@ namespace Car.Lidar {
             var handle = RaycastCommand.ScheduleBatch(_commands, _results, 64);
             handle.Complete();
 
-            // Generate the byte array (12 bytes = 3 * 4 bytes and 4 bytes = 1 float)
-            var data = new byte[12 * _results.Length];
+            
             for (var i = 0; i < _results.Length; i++) {
                 var resPoint = _results[i].point - transform.position;
-                var values = new[] {resPoint.z, -resPoint.x, resPoint.y};
+                values[0] = resPoint.z;
+                values[1] = -resPoint.x;
+                values[2] = resPoint.y;
+                
                 for (var j = 0; j < values.Length; j++) {
                     var bytes = BitConverter.GetBytes(values[j]);
                     for (var k = 0; k < bytes.Length; k++) data[12 * i + 4 * j + k] = bytes[k];

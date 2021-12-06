@@ -17,12 +17,12 @@ namespace Car.Camera {
         /// <summary>
         /// The necessary buffer size
         /// </summary>
-        private const int BUFFER_SIZE = 3 * WIDTH * HEIGHT;
+        private const int BUFFER_SIZE = WIDTH * HEIGHT;
 
         /// <summary>
         /// The number of images created per second
         /// </summary>
-        private const float HZ = 50f;
+        private const float HZ = 20f;
 
         /// <summary>
         /// The duration of a ray
@@ -62,7 +62,7 @@ namespace Car.Camera {
 
 
         private uint[] imageData = new uint[BUFFER_SIZE];
-        private byte[] data = new byte[BUFFER_SIZE];
+        private byte[] data = new byte[3*BUFFER_SIZE];
 
         /// <summary>
         /// Initialize the car camera
@@ -113,10 +113,20 @@ namespace Car.Camera {
             _pixelsBuffer.GetData(imageData);
 
 
-            for (var i = 0; i < BUFFER_SIZE; i++) data[i] = (byte) imageData[i];
-            var s = Stopwatch.StartNew();
+            for (var i = 0; i < BUFFER_SIZE; ++i)
+            {
+                uint rgba = imageData[i];
+                byte r = (byte)((rgba & 0xFF000000) >> 24);
+                byte g = (byte)((rgba & 0x00FF0000) >> 16);
+                byte b = (byte)((rgba & 0x0000FF00) >> 8);
+                data[i*3+0] = r;
+                data[i*3+1] = g;
+                data[i*3+2] = b;
+            }
+            print(data[data.Length-1]);
+            
             OnNewImage?.Invoke(data);
-            print(s.ElapsedMilliseconds);
+            
         }
 
         /// <summary>
