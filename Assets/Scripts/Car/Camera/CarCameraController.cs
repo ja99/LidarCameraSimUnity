@@ -6,9 +6,10 @@ using System;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
-namespace Car.Camera {
-
-    public class CarCameraController : MonoBehaviour {
+namespace Car.Camera
+{
+    public class CarCameraController : MonoBehaviour
+    {
         /// <summary>
         /// The dimensions of the image
         /// </summary>
@@ -60,14 +61,14 @@ namespace Car.Camera {
         private int _numOfThreads;
 
 
-
         private uint[] imageData = new uint[BUFFER_SIZE];
-        private byte[] data = new byte[3*BUFFER_SIZE];
+        private byte[] data = new byte[3 * BUFFER_SIZE];
 
         /// <summary>
         /// Initialize the car camera
         /// </summary>
-        private void Start() {
+        private void Start()
+        {
             // Connect the camera with the compute shader
             _pixelsBuffer = new ComputeBuffer(BUFFER_SIZE, sizeof(uint));
             var renderTexture = new RenderTexture(WIDTH, HEIGHT, 16);
@@ -79,67 +80,71 @@ namespace Car.Camera {
             computeShader.SetFloat("xResolution", WIDTH);
             computeShader.SetFloat("yResolution", HEIGHT);
             computeShader.GetKernelThreadGroupSizes(0, out var x, out _, out _);
-            _numOfThreads = (int) x;
+            _numOfThreads = (int)x;
             _last = DateTime.Now;
         }
 
         /// <summary>
         /// Clean up the pixel buffer
         /// </summary>
-        private void OnDestroy() {
+        private void OnDestroy()
+        {
             _pixelsBuffer.Dispose();
         }
 
         /// <summary>
         /// Generate the images
         /// </summary>
-        private void OnPostRender() {
+        private void OnPostRender()
+        {
             var now = DateTime.Now;
             if ((now - _last).TotalSeconds < 1f / HZ) return;
             _last = now;
 
-            
+
             GenerateImageData();
-            
         }
 
         /// <summary>
         /// Generate a new image
         /// </summary>
-        private void GenerateImageData() {
-
-
-            computeShader.Dispatch(0, Mathf.CeilToInt(WIDTH * HEIGHT / (float) _numOfThreads), 1, 1);
+        private void GenerateImageData()
+        {
+            computeShader.Dispatch(0, Mathf.CeilToInt(WIDTH * HEIGHT / (float)_numOfThreads), 1, 1);
             _pixelsBuffer.GetData(imageData);
 
 
             for (var i = 0; i < BUFFER_SIZE; ++i)
             {
+                //the uint32s in imageData are composed of r8g8b8a8
                 uint rgba = imageData[i];
+
+                //masking the uint32s and bitshifting them into a 1byte representation
                 byte r = (byte)((rgba & 0xFF000000) >> 24);
                 byte g = (byte)((rgba & 0x00FF0000) >> 16);
                 byte b = (byte)((rgba & 0x0000FF00) >> 8);
-                data[i*3+0] = r;
-                data[i*3+1] = g;
-                data[i*3+2] = b;
+                data[i * 3 + 0] = r;
+                data[i * 3 + 1] = g;
+                data[i * 3 + 2] = b;
             }
-            print(data[data.Length-1]);
-            
+
             OnNewImage?.Invoke(data);
-            
         }
 
         /// <summary>
         /// Draw rays for the perceived cones
         /// </summary>
         /// <param name="perceivedConesMessage">The perceived cones</param>
-        public void DrawConeRays(PerceivedConesMessage perceivedConesMessage) {
-            foreach (var cone in perceivedConesMessage.cones) {
+        public void DrawConeRays(PerceivedConesMessage perceivedConesMessage)
+        {
+            foreach (var cone in perceivedConesMessage.cones)
+            {
                 var ray = carCamera.ScreenPointToRay(new Vector2(
-                    (float) cone.x,
-                    YFlip((float) cone.y, carCamera.pixelHeight)
+                    (float)cone.x,
+                    YFlip((float)cone.y, carCamera.pixelHeight)
                 ));
-                var c = cone.cone_type switch {
+                var c = cone.cone_type switch
+                {
                     "blue_cone" => Color.blue,
                     "yellow_cone" => Color.yellow,
                     _ => Color.red
@@ -151,7 +156,8 @@ namespace Car.Camera {
         /// <summary>
         /// Y-Flip
         /// </summary>
-        private static float YFlip(float y, float screenHeight) {
+        private static float YFlip(float y, float screenHeight)
+        {
             var t = Mathf.InverseLerp(screenHeight, 0, y);
             return Mathf.Lerp(0, screenHeight, t);
         }

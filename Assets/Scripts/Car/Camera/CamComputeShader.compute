@@ -14,26 +14,17 @@ float yResolution;
 [numthreads(32,1,1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
+    // calculate position of the pixel in the image
     int xi = id.x % xResolution;
     int yi = yResolution - (id.x / xResolution);
-
-
     int2 pos = int2(xi, yi);
 
-#if 0
+    // unity colors are [0;1] but we need [0;255]
     float r = InputTexture[pos].r * 255.0;
     float g = InputTexture[pos].g * 255.0;
     float b = InputTexture[pos].b * 255.0;
-    
-    Pixels[id.x * 3] = r;
-    Pixels[(id.x * 3) + 1] = g;
-    Pixels[(id.x * 3) + 2] = b;
-#elif 1
-    float r = InputTexture[pos].r * 255.0;
-    float g = InputTexture[pos].g * 255.0;
-    float b = InputTexture[pos].b * 255.0;
-     
-    
-    Pixels[xi + (yResolution- yi)*xResolution] = ((uint)r << 24) | ((uint)g << 16) | ((uint)b << 8) | 0xff;
-#endif
+
+    // unity goes y axis is mirrored, so this mirrors it back
+    // Bitshifting the uint32 representation of the float rgb values by 1 byte each, so that all of them fit in one 32bit uint with 8bit precision
+    Pixels[xi + (yResolution - yi) * xResolution] = ((uint)r << 24) | ((uint)g << 16) | ((uint)b << 8) | 0xff;
 }
