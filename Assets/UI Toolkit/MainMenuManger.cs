@@ -14,16 +14,41 @@ public class MainMenuManger : MonoBehaviour
 
     private Button resetCarButton;
     private Button changeTrackButton;
+    private Button updateSettingsButton;
 
     private RadioButtonGroup radioButtonGroupMode;
 
 
+    
+    private void UpdateSettings()
+    {
+        int lidarFrequency = Convert.ToInt32(frequencyCameraTextField.text);
+        int cameraFrequency = Convert.ToInt32(frequencyLidarTextField.text);
+
+        DrivingMode mode = (DrivingMode)radioButtonGroupMode.value;
+
+        var output = String.Format("lidar: {0}, camera {1}, drivingMode: {2}", lidarFrequency, cameraFrequency, mode);
+        
+        Debug.Log(output);
+
+    }
+    
+    private void ChangeTrack()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ResetCar()
+    {
+        throw new NotImplementedException();
+    } 
     
 
     private void OnEnable()
     {
         rootVisualElement = this.GetComponent<UIDocument>().rootVisualElement;
         Querries();
+        AddListeners();
         
         
         SetFrequencyLidar(42);
@@ -31,13 +56,24 @@ public class MainMenuManger : MonoBehaviour
         SetDrivingMode(DrivingMode.Autonomous);
     }
 
+    private void AddListeners()
+    {
+        resetCarButton.clicked += ResetCar;
+        changeTrackButton.clicked += ChangeTrack;
+        updateSettingsButton.clicked += UpdateSettings;
+
+    }
+
+   
+
     /// <summary>
     /// A Method for assigning all the Buttons of the UI Elements
     /// </summary>
     private void Querries()
     {
         resetCarButton = rootVisualElement.Q<Button>("ButtonResetCar");
-        changeTrackButton = rootVisualElement.Q<Button>("ButtonChangeTrack");
+        changeTrackButton = rootVisualElement.Q<Button>("ButtonSwitchTrack");
+        updateSettingsButton = rootVisualElement.Q<Button>("ButtonUpdateSettings");
 
         frequencyLidarTextField = rootVisualElement.Q<TextField>("FrequencyLidar");
         frequencyCameraTextField = rootVisualElement.Q<TextField>("FrequencyCamera");
