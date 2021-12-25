@@ -18,6 +18,8 @@ public class MainMenuManger : MonoBehaviour
 
     private RadioButtonGroup radioButtonGroupMode;
 
+    public GameObject changeTrackDocument;
+
 
     
     private void UpdateSettings()
@@ -35,7 +37,7 @@ public class MainMenuManger : MonoBehaviour
     
     private void ChangeTrack()
     {
-        throw new NotImplementedException();
+        changeTrackDocument.SetActive(true);
     }
 
     private void ResetCar()
@@ -50,7 +52,7 @@ public class MainMenuManger : MonoBehaviour
         Querries();
         AddListeners();
         
-        
+        // How to set the values, when it comes e.g. from a configuration
         SetFrequencyLidar(42);
         SetFrequencyCamera(69);
         SetDrivingMode(DrivingMode.Autonomous);
