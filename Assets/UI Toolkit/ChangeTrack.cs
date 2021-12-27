@@ -8,6 +8,8 @@ public class ChangeTrack : MonoBehaviour
     private VisualElement rootVisualElement;
     private Button buttonBack;
 
+    public TrackManager trackManager;
+
     private void OnEnable()
     {
         rootVisualElement = this.GetComponent<UIDocument>().rootVisualElement;
@@ -26,16 +28,16 @@ public class ChangeTrack : MonoBehaviour
 
     private void StartEndurance()
     {
-        throw new System.NotImplementedException();
+        trackManager.SetTrack("endurance");
     }
 
     private void StartSkidpad()
     {
-        throw new System.NotImplementedException();
+        trackManager.SetTrack("skidpad");
     }
 
     private void StartAccerleration()
     {
-        throw new System.NotImplementedException();
+        trackManager.SetTrack("acceleration");
     }
 }
