@@ -13,31 +13,32 @@ public class TrackManager : MonoBehaviour
     public GameObject TrackEndurance;
     public GameObject TrackAcceleration;
     public GameObject TrackSkidpad;
-
-    public AutoPathFollower autoPathFollower;
+    
+    public AutoPathFollower autoPathFollower;  // Autopath follower of the car
     
 
     public void SetTrack(string track)
     {
-        TrackEndurance.SetActive(false);
-        TrackAcceleration.SetActive(false);
-        TrackSkidpad.SetActive(false);
+        // hide all tracks
+        TrackEndurance.GetComponent<ConePathPlacer>().holder.SetActive(false);
+        TrackAcceleration.GetComponent<ConePathPlacer>().holder.SetActive(false);
+        TrackSkidpad.GetComponent<ConePathPlacer>().holder.SetActive(false);
 
         switch (track)
         {
             case "endurance":
-                TrackEndurance.SetActive(true);
+                TrackEndurance.GetComponent<ConePathPlacer>().holder.SetActive(true);
                 // Set the path for the Car
                 autoPathFollower.pathCreator = TrackEndurance.GetComponent<PathCreator>();
                 
                 break;
             case "acceleration":
-                TrackEndurance.SetActive(true);
+                TrackAcceleration.GetComponent<ConePathPlacer>().holder.SetActive(true);
                 autoPathFollower.pathCreator = TrackAcceleration.GetComponent<PathCreator>();
 
                 break;
             case "skidpad":
-                TrackSkidpad.SetActive(true);
+                TrackSkidpad.GetComponent<ConePathPlacer>().holder.SetActive(true);
                 autoPathFollower.pathCreator = TrackSkidpad.GetComponent<PathCreator>();
 
                 break;
