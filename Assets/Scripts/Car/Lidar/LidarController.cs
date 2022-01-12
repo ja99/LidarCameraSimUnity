@@ -123,6 +123,7 @@ namespace Car.Lidar {
             
             for (var i = 0; i < _results.Length; i++) {
                 var resPoint = _results[i].point - transform.position;
+				resPoint = Quaternion.Euler(-transform.eulerAngles) * resPoint;
                 values[0] = resPoint.z;
                 values[1] = -resPoint.x;
                 values[2] = resPoint.y;
